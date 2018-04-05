@@ -3,7 +3,7 @@ FROM alpine:3.7
 LABEL maintainer="letssudormrf"
 
 ENV V2RAY_GIT_PATH="https://github.com/v2ray/v2ray-core" \
-    CERT="" KEY="" UUID="" WSPATH="" VER="" \
+    CERT="" KEY="" UUID="" WSPATH="" VER=""
 
 RUN apk add --no-cache --virtual .build-deps bash ca-certificates curl \
     && cd /tmp \
