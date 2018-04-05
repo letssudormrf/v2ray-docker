@@ -3,7 +3,7 @@ FROM alpine:3.7
 LABEL maintainer="letssudormrf"
 
 ENV V2RAY_GIT_PATH="https://github.com/v2ray/v2ray-core" \
-    UUID="" WSPATH="" VER=""
+    CERT="" KEY="" UUID="" WSPATH="" VER=""
 
 RUN apk add --no-cache --virtual .build-deps bash ca-certificates curl gettext libintl \
     && cd /tmp \
@@ -23,6 +23,6 @@ RUN chmod a+rwx /usr/local/bin/entrypoint.sh /usr/local/bin/v2ray /usr/local/bin
 
 WORKDIR /tmp
 
-EXPOSE 8080/tcp
+EXPOSE 8443/tcp 8080/tcp
 
 CMD ["entrypoint.sh"]
