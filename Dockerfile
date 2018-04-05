@@ -3,7 +3,11 @@ FROM alpine:3.7
 LABEL maintainer="letssudormrf"
 
 ENV V2RAY_GIT_PATH="https://github.com/v2ray/v2ray-core" \
-    VER=$(curl --silent "https://api.github.com/repos/${V2RAY_GIT_PATH#**//*/}/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    CERT="" \
+    KEY=""  \
+    UUID="" \
+    WSPATH="" \
+    VER="$(curl --silent "https://api.github.com/repos/${V2RAY_GIT_PATH#**//*/}/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')"
 
 RUN apk add --no-cache --virtual .build-deps bash ca-certificates curl \
     && cd /tmp \
