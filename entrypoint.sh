@@ -1,7 +1,7 @@
 #!/bin/sh
 
 UUID=${UUID:-"49977c6d-44e6-4399-9293-87a80e3d958f"}
-WSPATH=${WSPATH:-"/"}
+WSPATH=${WSPATH:-""}
 
 if [ "$CERT" != "$KEY" ]; then
   echo -e "$CERT" > v2ray.crt
