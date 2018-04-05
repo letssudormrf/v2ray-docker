@@ -10,7 +10,7 @@
     "settings": {
       "clients": [
         {
-          "id": "${UUID}",
+          "id": "$UUID",
           "level": 1,
           "alterId": 64
         }
@@ -19,7 +19,7 @@
     "streamSettings": {
       "network": "ws",
       "wsSettings": {
-      "path": "${WSPATH}"
+      "path": "$WSPATH"
       }
     },
    "tcpSettings": null, 
