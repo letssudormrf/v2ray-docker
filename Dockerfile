@@ -3,14 +3,11 @@ FROM alpine:3.7
 LABEL maintainer="letssudormrf"
 
 ENV V2RAY_GIT_PATH="https://github.com/v2ray/v2ray-core" \
-    CERT="" \
-    KEY=""  \
-    UUID="" \
-    WSPATH="" \
-    VER="$(curl --silent "https://api.github.com/repos/${V2RAY_GIT_PATH#**//*/}/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')"
+    CERT="" KEY="" UUID="" WSPATH="" VER="" \
 
 RUN apk add --no-cache --virtual .build-deps bash ca-certificates curl \
     && cd /tmp \
+    && export VER=$(curl --silent https://api.github.com/repos/${V2RAY_GIT_PATH#**//*/}/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \
     && curl -L -H "Cache-Control: no-cache" -o v2ray.zip ${V2RAY_GIT_PATH}/releases/download/$VER/v2ray-linux-64.zip \
     && unzip v2ray.zip \
     && mv v2ray-$VER-linux-64/v2ray /usr/local/bin/ \
