@@ -1,11 +1,11 @@
 {
   "log" : {
-    "access": "/dev/stdout",
-    "error": "/dev/stderr",
-    "loglevel": "warning"
+    "access": "$ACCESS_LOG",
+    "error": "$ERROR_LOG",
+    "loglevel": "$LOG_LEVEL"
   },
   "inbound": {
-    "port": 8080,
+    "port": 8880,
     "protocol": "vmess",
     "settings": {
       "clients": [
