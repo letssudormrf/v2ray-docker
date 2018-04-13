@@ -6,8 +6,8 @@ export ERROR_LOG=${ERROR_LOG:-"/dev/stderr"}
 export LOG_LEVEL=${LOG_LEVEL:-"warning"}
 
 # [Mode:vars]
-# 1)ws+tls  value:ws (default)| bind:8880/tcp
-# 2)tcp+tls value:tcp         | bind:8880/tcp
+# 1)ws+tls  value:ws (default)| nginx port:8080/tcp
+# 2)tcp+tls value:tcp         | nginx port:8443/tcp
 export MODE=${MODE:-"ws"}
 
 # [ClientID:vars]
@@ -38,7 +38,7 @@ ws)
     CONFIG=${CONFIG:-'{"log":{"access":"$ACCESS_LOG","error":"$ERROR_LOG","loglevel":"$LOG_LEVEL"},"inbound":{"port":8880,"protocol":"vmess","settings":{"clients":[{"id":"$UUID","level":1,"alterId":64}]},"streamSettings":{"network":"ws","wsSettings":{"path":"$WSPATH"}}},"outbound":{"protocol":"freedom","settings":{}},"outboundDetour":[{"protocol":"blackhole","settings":{},"tag":"blocked"}],"routing":{"strategy":"rules","settings":{"rules":[{"type":"field","ip":["0.0.0.0/8","10.0.0.0/8","100.64.0.0/10","127.0.0.0/8","169.254.0.0/16","172.16.0.0/12","192.0.0.0/24","192.0.2.0/24","192.168.0.0/16","198.18.0.0/15","198.51.100.0/24","203.0.113.0/24","::1/128","fc00::/7","fe80::/10"],"outboundTag":"blocked"}]}}}'}
 
     if [ ! -f /tmp/cert.pem ]; then
-    openssl req -subj '/CN=www.example.com/O=Internet Corporation for Assigned Names and Numbers/C=US/OU=Technology' -new -x509 -sha256 -days 3650 -nodes -out /tmp/cert.pem -keyout /tmp/key.pem
+        openssl req -subj '/CN=www.example.com/O=Internet Corporation for Assigned Names and Numbers/C=US/OU=Technology' -new -x509 -sha256 -days 3650 -nodes -out /tmp/cert.pem -keyout /tmp/key.pem
     fi
 
     if [ "$FAILOVER" != "www.example.com" ]; then
@@ -47,11 +47,6 @@ ws)
 
     if [ "$WSPATH" != "/v2/" ]; then
         sed -i "s#/v2/#$WSPATH#g" /etc/nginx/conf.d/default.conf
-    fi
-
-    # Create nginx html folder
-    if [ ! -d /tmp/html ]; then
-        mkdir -p /tmp/html
     fi
 
     nginx -g "daemon on;"
