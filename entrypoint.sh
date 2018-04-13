@@ -6,8 +6,8 @@ export ERROR_LOG=${ERROR_LOG:-"/dev/stderr"}
 export LOG_LEVEL=${LOG_LEVEL:-"warning"}
 
 # [Mode:vars]
-# 1)ws+tls  value:ws (default)| nginx port:8080/tcp
-# 2)tcp+tls value:tcp         | nginx port:8443/tcp
+# 1)ws+tls  value:ws (default)| bind port:8880/tcp nginx port:{ws:8080/tcp,wss:8443/tcp}
+# 2)tcp+tls value:tcp         | bind port:8880/tcp
 export MODE=${MODE:-"ws"}
 
 # [ClientID:vars]
