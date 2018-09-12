@@ -1,0 +1,25 @@
+${DOMAIN}:${HTTP_PORT} {
+tls off
+timeouts none
+proxy ${WSPATH} localhost:${V2_PORT} {
+websocket
+header_upstream -Origin
+}
+redir 301 {
+if {path} not ${WSPATH}
+/ {scheme}://${FAILOVER}{uri}
+}
+}
+
+${DOMAIN}:${HTTPS_PORT} {
+tls ${TLS}
+timeouts none
+proxy ${WSPATH} localhost:${V2_PORT} {
+websocket
+header_upstream -Origin
+}
+redir 301 {
+if {path} not ${WSPATH}
+/ {scheme}://${FAILOVER}{uri}
+}
+}

@@ -1,0 +1,19 @@
+  "inbound": {
+    "port": $V2_PORT,
+    "protocol": "vmess",
+    "settings": {
+      "clients": [
+        {
+          "id": "$UUID",
+          "level": 1,
+          "alterId": $ALTERID
+        }
+      ]
+    },
+    "streamSettings": {
+      "network": "$MODE",
+      "wsSettings": {
+      "path": "$WSPATH"
+      }
+    }
+  },
