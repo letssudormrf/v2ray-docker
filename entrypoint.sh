@@ -54,7 +54,7 @@ export EXT_DNS=${EXT_DNS:-""}
 export NAMESERVER1=${NAMESERVER1:-"8.8.8.8"}
 export NAMESERVER2=${NAMESERVER2:-"8.8.4.4"}
 
-# [CONFIG:vars]
+# [ProjectV_CONFIG:vars]
 export CONFIG=${CONFIG:-""}
 export HEADER_NUM=${HEADER_NUM:-"001"}
 export LOG_NUM=${LOG_NUM:-"010"}
@@ -70,12 +70,22 @@ export OUTBOUNDDETOUR_NUM=${OUTBOUNDDETOUR_NUM:-"100"}
 export TRANSPORT_NUM=${TRANSPORT_NUM:-"110"}
 export FOOTER_NUM=${FOOTER_NUM:-"999"}
 
+# [Caddyfile_CONFIG:vars]
+export CADDYFILE_NUM=${CADDYFILE_NUM:-"001"}
+export FORWARDPROXY=${FORWARDPROXY:-""} 
+export BASICAUTH=${BASICAUTH:-"h2user h2secret"}
+export DIAL_TIMEOUT=${DIAL_TIMEOUT:-"600"}
+
 if [ ! -z "$PROXY" ]; then
     export OUTBOUND_NUM="081"
 fi
 
 if [ ! -z "$EXT_DNS" ]; then
     export DNS_NUM="031"
+fi
+
+if [ ! -z "$FORWARDPROXY" ]; then
+    export CADDYFILE_NUM="002"    
 fi
 
 # ProjectV render
@@ -150,7 +160,7 @@ EOF
     )"
 fi
 
-envsubst < /usr/local/share/caddycfg/Caddyfile > ${CADDYPATH}Caddyfile
+envsubst < /usr/local/share/caddycfg/${CADDYFILE_NUM}_Caddyfile.tmpl > ${CADDYPATH}Caddyfile
 echo "$CONFIG" | envsubst > ${V2RAY_LOCATION_CONFIG}config.json
 
 nohup caddy -conf ${CADDYPATH}Caddyfile -log ${CADDY_LOG} -http-port ${HTTP_PORT} -https-port ${HTTPS_PORT} -agree=true -root=${CADDYPATH}html &
