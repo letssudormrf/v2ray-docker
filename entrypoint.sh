@@ -164,4 +164,4 @@ envsubst < /usr/local/share/caddycfg/${CADDYFILE_NUM}_Caddyfile.tmpl > ${CADDYPA
 echo "$CONFIG" | envsubst > ${V2RAY_LOCATION_CONFIG}config.json
 
 nohup caddy -conf ${CADDYPATH}Caddyfile -log ${CADDY_LOG} -http-port ${HTTP_PORT} -https-port ${HTTPS_PORT} -agree=true -root=${CADDYPATH}html &
-v2ray -config ${V2RAY_LOCATION_CONFIG}config.json >> /dev/null 2>&1
+v2ray -config ${V2RAY_LOCATION_CONFIG}config.json
