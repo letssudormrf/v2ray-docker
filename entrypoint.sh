@@ -75,6 +75,7 @@ export CADDYFILE_NUM=${CADDYFILE_NUM:-"001"}
 export FORWARDPROXY=${FORWARDPROXY:-""} 
 export BASICAUTH=${BASICAUTH:-"h2user h2secret"}
 export DIAL_TIMEOUT=${DIAL_TIMEOUT:-"600"}
+export PROBE_RESISTANCE=${PROBE_RESISTANCE:-""}
 
 if [ ! -z "$PROXY" ]; then
     export OUTBOUND_NUM="081"
@@ -86,6 +87,10 @@ fi
 
 if [ ! -z "$FORWARDPROXY" ]; then
     export CADDYFILE_NUM="002"    
+fi
+
+if [ ! -z "$PROBE_RESISTANCE" ]; then
+    export PROBE_RESISTANCE=$(echo "probe_resistance ${PROBE_RESISTANCE}")
 fi
 
 # ProjectV render
