@@ -21,7 +21,7 @@ RUN apk add --no-cache --virtual .buildDeps curl bash gnupg \
     && curl https://getcaddy.com | bash -s personal ${CADDY_PLUGINS} \
     && VER=$(curl --silent https://api.github.com/repos/${V2_GIT_PATH#**//*/}/releases/${V2_VERSION} | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \    
     && curl -L -H "Cache-Control: no-cache" -o /tmp/v2.zip ${V2_GIT_PATH}/releases/download/$VER/v2ray-linux-64.zip \
-    && unzip -j /tmp/v2.zip "v2ray-$VER-linux-64/v2ray" "v2ray-$VER-linux-64/v2ctl" "v2ray-$VER-linux-64/geoip.dat" "v2ray-$VER-linux-64/geosite.dat" -d /usr/local/bin/ \
+    && unzip -j /tmp/v2.zip "v2ray" "v2ctl" "geoip.dat" "geosite.dat" -d /usr/local/bin/ \
     && mv /usr/bin/envsubst /usr/local/bin/ \
     && apk del .buildDeps \
     && apk del .gettext \
