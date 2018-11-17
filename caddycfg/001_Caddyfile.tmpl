@@ -10,7 +10,7 @@ header_upstream -Origin
 }
 redir 301 {
 if {path} not ${WSPATH}
-if {path} not ${DOHPATH}
+if {path} not_has ${DOHPATH}
 / {scheme}://${FAILOVER}{uri}
 }
 }
@@ -27,7 +27,7 @@ header_upstream -Origin
 }
 redir 301 {
 if {path} not ${WSPATH}
-if {path} not ${DOHPATH}
+if {path} not_has ${DOHPATH}
 / {scheme}://${FAILOVER}{uri}
 }
 }
