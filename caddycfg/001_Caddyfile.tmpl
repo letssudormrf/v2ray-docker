@@ -9,7 +9,8 @@ websocket
 header_upstream -Origin
 }
 redir 301 {
-if {path} not ${WSPATH} or ${DOHPATH}
+if {path} not ${WSPATH}
+if {path} not ${DOHPATH}
 / {scheme}://${FAILOVER}{uri}
 }
 }
@@ -25,7 +26,8 @@ websocket
 header_upstream -Origin
 }
 redir 301 {
-if {path} not ${WSPATH} or ${DOHPATH}
+if {path} not ${WSPATH}
+if {path} not ${DOHPATH}
 / {scheme}://${FAILOVER}{uri}
 }
 }
