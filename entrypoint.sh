@@ -24,6 +24,7 @@ export ALTERID=${ALTERID:-"0"}
 
 # [Path:vars]
 export WSPATH=${WSPATH:-"/v2/"}
+export DOHPATH=${DOHPATH:-"/dns/"}
 
 # [Let'sencrypt_Domain:vars]
 export DOMAIN=${DOMAIN:-"0.0.0.0"}
