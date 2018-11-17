@@ -9,7 +9,7 @@ websocket
 header_upstream -Origin
 }
 redir 301 {
-if {path} not ${WSPATH}
+if {path} not ${WSPATH} or ${DOHPATH}
 / {scheme}://${FAILOVER}{uri}
 }
 }
@@ -32,7 +32,7 @@ dial_timeout ${DIAL_TIMEOUT}
 ${PROBE_RESISTANCE}
 }
 redir 301 {
-if {path} not ${WSPATH}
+if {path} not ${WSPATH} or ${DOHPATH}
 / {scheme}://${FAILOVER}{uri}
 }
 }
