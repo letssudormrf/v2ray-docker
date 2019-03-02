@@ -27,7 +27,7 @@ export WSPATH=${WSPATH:-"/v2/"}
 export DOHPATH=${DOHPATH:-"/dns/"}
 
 # [Let'sencrypt_Domain:vars]
-export DOMAIN=${DOMAIN:-""}
+export DOMAIN=${DOMAIN:-"0.0.0.0"}
 
 # [Failover_Domain:vars]
 export FAILOVER=${FAILOVER:-"www.example.com"}
@@ -169,5 +169,5 @@ fi
 envsubst < /usr/local/share/caddycfg/${CADDYFILE_NUM}_Caddyfile.tmpl > ${CADDYPATH}Caddyfile
 echo "$CONFIG" | envsubst > ${V2RAY_LOCATION_CONFIG}config.json
 
-nohup caddy -conf ${CADDYPATH}Caddyfile -log ${CADDY_LOG} -http-port ${HTTP_PORT} -https-port ${HTTPS_PORT} -agree=true -root=${CADDYPATH}html -default-sni localhost.localdomain &
+nohup caddy -conf ${CADDYPATH}Caddyfile -log ${CADDY_LOG} -http-port ${HTTP_PORT} -https-port ${HTTPS_PORT} -agree=true -root=${CADDYPATH}html -default-sni 0.0.0.0 &
 v2ray -config ${V2RAY_LOCATION_CONFIG}config.json
