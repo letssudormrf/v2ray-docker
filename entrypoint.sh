@@ -27,7 +27,7 @@ export WSPATH=${WSPATH:-"/v2/"}
 export DOHPATH=${DOHPATH:-"/dns/"}
 
 # [Let'sencrypt_Domain:vars]
-export DOMAIN=${DOMAIN:-"0.0.0.0"}
+export DOMAIN=${DOMAIN:-""}
 
 # [Failover_Domain:vars]
 export FAILOVER=${FAILOVER:-"www.example.com"}
