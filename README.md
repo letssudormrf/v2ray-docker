@@ -21,6 +21,13 @@ OUTBOUNDDETOUR='"outboundDetour":[{"protocol":"blackhole","settings":{},"tag":"b
 ROUTING='"routing":{"strategy":"rules","settings":{"rules":[{"type":"field","inboundTag":["tg-in"],"outboundTag":"tg-out"},{"type":"field","ip":["0.0.0.0/8","10.0.0.0/8","100.64.0.0/10","127.0.0.0/8","169.254.0.0/16","172.16.0.0/12","192.0.0.0/24","192.0.2.0/24","192.168.0.0/16","198.18.0.0/15","198.51.100.0/24","203.0.113.0/24","::1/128","fc00::/7","fe80::/10"],"outboundTag":"blocked"}]}},'
 ```
 
+Add Netflix outbound server.
+```
+ROUTING='"routing":{"strategy":"rules","settings":{"rules":[{"type": "field","port": null,"outboundTag": "netflix","ip": null,"domain": ["geosite:netflix"]},{"type":"field","ip":["0.0.0.0/8","10.0.0.0/8","100.64.0.0/10","127.0.0.0/8","169.254.0.0/16","172.16.0.0/12","192.0.0.0/24","192.0.2.0/24","192.168.0.0/16","198.18.0.0/15","198.51.100.0/24","203.0.113.0/24","::1/128","fc00::/7","fe80::/10"],"outboundTag":"blocked"}]}},'
+
+OUTBOUNDDETOUR='"outboundDetour":[{"protocol":"blackhole","settings":{},"tag":"blocked"},{"tag":"netflix","protocol":"vmess","settings":{"vnext":[{"port": 443,"users":[{"id": "117ff1a7-d810-4ec7-b368-6fc4491a4435","level":1,"alterId":0,"security":"none"}],"address":"netflix.example.com"}]},"streamSettings":{"security":"tls","tlsSettings":{"serverName":"netflix.example.com","allowInsecure":true},"network":"ws","wsSettings":{"path":"/v2/","headers":{"Host":"netflix.example.com"}}}}],'
+```
+
 Create CERT & KEY Environment
 
     cat fullchain.cer | sed ':a;N;$!ba;s#\n#\\n#g'
